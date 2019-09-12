@@ -1,4 +1,4 @@
-package com.example.mviexample.ui.main.model
+package com.example.mviexample.model
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
