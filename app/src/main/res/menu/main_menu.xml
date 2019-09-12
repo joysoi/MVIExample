@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/action_get_user"
+        android:title="get user" />
+
+    <item
+        android:id="@+id/action_get_blocks"
+        android:title="get blocks" />
+
+</menu>
