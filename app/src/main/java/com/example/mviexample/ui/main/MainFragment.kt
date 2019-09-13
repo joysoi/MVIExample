@@ -29,21 +29,24 @@ class MainFragment : Fragment() {
         } ?: throw Exception("Invalid activity")
     }
 
-    fun subscribeObservers(){
-        viewModel.dataState.observe(viewLifecycleOwner, Observer { dataState->
+    fun subscribeObservers() {
+        viewModel.dataState.observe(viewLifecycleOwner, Observer { dataState ->
 
             println("DEBUG: DataState: $dataState")
-            dataState.
-                blogPosts?.let {
+            dataState.blogPosts?.let { blogPosts ->
+
+                viewModel.setBlogListData(blogPosts)
 
             }
 
-            dataState.user?.let {
+            dataState.user?.let { user ->
+
+                viewModel.setUser(user)
 
             }
         })
 
-        viewModel.viewState.observe(viewLifecycleOwner, Observer { viewState->
+        viewModel.viewState.observe(viewLifecycleOwner, Observer { viewState ->
 
             viewState.blogPosts?.let {
 
