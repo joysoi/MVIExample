@@ -43,8 +43,14 @@ class MainViewModel : ViewModel() {
 
         }
 
+    fun setBlogListData(blogPost: List<BlogPost>) {
+        val update = getCurrnetViewStateOrNew()
+        update.blogPosts
+    }
 
-    fun getCurrnetViewStateOrNew (blogPosts : List<BlogPost>){
-
+    fun getCurrnetViewStateOrNew(): MainViewState {
+        return viewState.value?.let {
+            it
+        } ?: MainViewState()
     }
 }
