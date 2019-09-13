@@ -3,26 +3,26 @@ package com.example.mviexample.model
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
-data class Blockpost (
+data class BlogPost(
 
     @Expose
     @SerializedName("pk")
-    val pk : Int? = null,
+    val pk: Int? = null,
 
     @Expose
     @SerializedName("title")
-    val title : String? = null,
+    val title: String? = null,
 
     @Expose
     @SerializedName("body")
-    val body : String? = null,
+    val body: String? = null,
 
     @Expose
     @SerializedName("image")
-    val image : String? = null
-
-){
+    val image: String? = null
+)
+{
     override fun toString(): String {
-        return "Blockpost(pk=$pk, title=$title, body=$body, image=$image)"
+        return "BlogPost(title=$title, body=$body, image=$image)"
     }
 }

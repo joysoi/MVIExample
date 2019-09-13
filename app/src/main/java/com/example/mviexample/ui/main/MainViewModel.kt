@@ -4,6 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
+import com.example.mviexample.model.BlogPost
+
 import com.example.mviexample.ui.main.state.MainStateEvent
 import com.example.mviexample.ui.main.state.MainStateEvent.*
 import com.example.mviexample.ui.main.state.MainViewState
@@ -40,4 +42,9 @@ class MainViewModel : ViewModel() {
             }
 
         }
+
+
+    fun getCurrnetViewStateOrNew (blogPosts : List<BlogPost>){
+
+    }
 }
