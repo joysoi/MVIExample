@@ -13,12 +13,27 @@ import com.example.mviexample.ui.main.state.MainViewState
 import com.example.mviexample.util.AbsentLiveData
 
 class MainViewModel : ViewModel() {
+
+    //_stateEvent is responsible for triggering different actions that we want to do
     private val _stateEvent: MutableLiveData<MainStateEvent> = MutableLiveData()
+
+    //_viewState is observing the different data models that are going to be visible in the View
     private val _viewState: MutableLiveData<MainViewState> = MutableLiveData()
 
     // we observe viewState in the VM which is based on _viewState that is private to this class only
     val viewState: LiveData<MainViewState>
         get() = _viewState
+
+
+    //dataState: we listen to the different state events (Transformations.switchMap)
+    val dataState: LiveData<MainViewState> = Transformations
+        .switchMap(_stateEvent) { stateEvent ->
+
+            stateEvent?.let {
+                handleStateEvent(it)
+            }
+
+        }
 
     fun handleStateEvent(stateEvent: MainStateEvent): LiveData<MainViewState> {
         when (stateEvent) {
@@ -35,15 +50,6 @@ class MainViewModel : ViewModel() {
             }
         }
     }
-
-    val dataState: LiveData<MainViewState> = Transformations
-        .switchMap(_stateEvent) { stateEvent ->
-
-            stateEvent?.let {
-                handleStateEvent(it)
-            }
-
-        }
 
     fun setBlogListData(blogPost: List<BlogPost>) {
         val update = getCurrentViewStateOrNew()
@@ -62,6 +68,7 @@ class MainViewModel : ViewModel() {
             it
         } ?: MainViewState()
     }
+
 
     fun setStateEvent(event: MainStateEvent){
         _stateEvent.value = event

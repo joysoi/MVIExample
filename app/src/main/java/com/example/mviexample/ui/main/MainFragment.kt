@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.mviexample.R
+import com.example.mviexample.ui.main.state.MainStateEvent
 import java.lang.Exception
 
 class MainFragment : Fragment() {
@@ -54,6 +55,7 @@ class MainFragment : Fragment() {
             }
 
             viewState.user?.let {
+
                 println("DEBUG: Setting user info $it")
             }
 
@@ -66,6 +68,19 @@ class MainFragment : Fragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+            R.id.action_get_user -> triggerGetUserEvent()
+
+            R.id.action_get_blocks -> triggerGetBlogsEvent()
+        }
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun triggerGetBlogsEvent() {
+        viewModel.setStateEvent(MainStateEvent.GetBlockPostsEvent())
+    }
+
+    private fun triggerGetUserEvent() {
+        viewModel.setStateEvent(MainStateEvent.GetUserEvent("1"))
     }
 }
