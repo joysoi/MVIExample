@@ -2,11 +2,11 @@ package com.example.mviexample.ui.main.state
 
 sealed class MainStateEvent {
 
-    class GetBlockPostsEvent : MainStateEvent()
+    class GetBlogPostsEvent: MainStateEvent()
 
     class GetUserEvent(
         val userId: String
-    ) : MainStateEvent()
+    ): MainStateEvent()
 
-    class None : MainStateEvent()
+    class None: MainStateEvent()
 }

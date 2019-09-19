@@ -39,7 +39,7 @@ class MainViewModel : ViewModel() {
         println("DEBUG: New StateEvent detected: $stateEvent")
         when(stateEvent){
 
-            is GetBlockPostsEvent -> {
+            is GetBlogPostsEvent -> {
                 return Repository.getBlogPosts()
             }
 
