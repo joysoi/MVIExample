@@ -6,11 +6,13 @@ import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import com.example.mviexample.model.BlogPost
 import com.example.mviexample.model.User
+import com.example.mviexample.repo.Repository
 
 import com.example.mviexample.ui.main.state.MainStateEvent
 import com.example.mviexample.ui.main.state.MainStateEvent.*
 import com.example.mviexample.ui.main.state.MainViewState
 import com.example.mviexample.util.AbsentLiveData
+import com.example.mviexample.util.DataState
 
 class MainViewModel : ViewModel() {
 
@@ -26,34 +28,34 @@ class MainViewModel : ViewModel() {
 
 
     //dataState: we listen to the different state events (Transformations.switchMap)
-    val dataState: LiveData<MainViewState> = Transformations
-        .switchMap(_stateEvent) { stateEvent ->
-
+    val dataState: LiveData<DataState<MainViewState>> = Transformations
+        .switchMap(_stateEvent){stateEvent ->
             stateEvent?.let {
-                handleStateEvent(it)
+                handleStateEvent(stateEvent)
             }
-
         }
 
-    fun handleStateEvent(stateEvent: MainStateEvent): LiveData<MainViewState> {
-        when (stateEvent) {
+    fun handleStateEvent(stateEvent: MainStateEvent): LiveData<DataState<MainViewState>>{
+        println("DEBUG: New StateEvent detected: $stateEvent")
+        when(stateEvent){
+
             is GetBlockPostsEvent -> {
-                return AbsentLiveData.create()
+                return Repository.getBlogPosts()
             }
 
             is GetUserEvent -> {
-                return AbsentLiveData.create()
+                return Repository.getUser(stateEvent.userId)
             }
 
-            is None -> {
+            is None ->{
                 return AbsentLiveData.create()
             }
         }
     }
 
-    fun setBlogListData(blogPost: List<BlogPost>) {
+    fun setBlogListData(blogPosts: List<BlogPost>){
         val update = getCurrentViewStateOrNew()
-        update.blogPosts = blogPost
+        update.blogPosts = blogPosts
         _viewState.value = update
     }
 
@@ -64,13 +66,15 @@ class MainViewModel : ViewModel() {
     }
 
     fun getCurrentViewStateOrNew(): MainViewState {
-        return viewState.value?.let {
+        val value = viewState.value?.let{
             it
-        } ?: MainViewState()
+        }?: MainViewState()
+        return value
     }
 
-
     fun setStateEvent(event: MainStateEvent){
-        _stateEvent.value = event
+        val state: MainStateEvent
+        state = event
+        _stateEvent.value = state
     }
 }
