@@ -8,7 +8,7 @@ import com.example.mviexample.ui.main.state.MainViewState
 import com.example.mviexample.util.ApiSuccessResponse
 import com.example.mviexample.util.DataState
 import com.example.mviexample.util.GenericApiResponse
-import retrofit2.Retrofit
+
 
 object Repository {
 

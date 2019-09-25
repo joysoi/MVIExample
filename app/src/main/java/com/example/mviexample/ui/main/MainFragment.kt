@@ -117,12 +117,12 @@ class MainFragment : Fragment(),
 
     }
 
-    fun triggerGetUserEvent(){
-        viewModel.setStateEvent(MainStateEvent.GetUserEvent("1"))
-    }
-
     fun triggerGetBlogsEvent(){
         viewModel.setStateEvent(MainStateEvent.GetBlogPostsEvent())
+    }
+
+    fun triggerGetUserEvent(){
+        viewModel.setStateEvent(MainStateEvent.GetUserEvent("1"))
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

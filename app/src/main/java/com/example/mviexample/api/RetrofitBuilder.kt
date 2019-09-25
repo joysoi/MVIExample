@@ -4,6 +4,10 @@ import com.example.mviexample.util.LiveDataCallAdapterFactory
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
+/**
+ * object keyword represents a singleton - a class that only has got one instance
+ */
+
 object RetrofitBuilder {
 
     const val BASE_URL = "https://open-api.xyz/"

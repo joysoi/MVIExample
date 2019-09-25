@@ -23,6 +23,11 @@ class MainViewModel : ViewModel() {
     private val _viewState: MutableLiveData<MainViewState> = MutableLiveData()
 
     // we observe viewState in the VM which is based on _viewState that is private to this class only
+    /**
+     * getter and setter are optional, but if we define a custom getter,
+     * it will be called every time we access the property
+     * Example:
+     */
     val viewState: LiveData<MainViewState>
         get() = _viewState
 
@@ -73,8 +78,7 @@ class MainViewModel : ViewModel() {
     }
 
     fun setStateEvent(event: MainStateEvent){
-        val state: MainStateEvent
-        state = event
+        val state: MainStateEvent = event
         _stateEvent.value = state
     }
 }
